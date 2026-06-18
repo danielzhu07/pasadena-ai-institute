@@ -26,7 +26,8 @@ export function ApplyCard() {
       </div>
       <p className="mt-3 text-sm leading-relaxed text-white/65">
         The first cohort, in person in Pasadena on {site.cohort.dates.workshop}.
-        Seats are earned by application, not payment.
+        Seats are earned by application first; accepted applicants can use
+        checkout codes for discounts or scholarships.
       </p>
 
       <ul className="mt-8 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">

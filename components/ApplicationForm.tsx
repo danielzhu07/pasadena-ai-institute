@@ -217,8 +217,8 @@ export function ApplicationForm() {
         {status === "submitting" ? "Submitting…" : "Submit application"}
       </button>
       <p className="mx-auto max-w-[52ch] text-center text-xs text-ink-500">
-        No payment. Reviewed on a rolling basis; you&rsquo;ll hear back by{" "}
-        {site.cohort.dates.decisionsByShort}.
+        No payment with this application. If accepted, you&rsquo;ll receive
+        checkout instructions and any discount or scholarship code.
       </p>
     </form>
   );

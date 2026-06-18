@@ -28,17 +28,17 @@ export default function HomePage() {
             <LiquidGlassCard
             draggable={false}
             blurIntensity="xl"
-            shadowIntensity="sm"
-            glowIntensity="sm"
-            borderRadius="28px"
-            className="max-w-2xl animate-fade-in -mt-16 bg-white/50 px-8 py-9 sm:px-10 sm:py-11 lg:-ml-20"
+            shadowIntensity="xs"
+            glowIntensity="none"
+            borderRadius="8px"
+            className="max-w-2xl animate-fade-in -mt-16 bg-white/8 px-8 py-9 text-white sm:px-10 sm:py-11 lg:-ml-20"
           >
-            <h1 className="font-serif text-[clamp(2.75rem,6.5vw,5rem)] font-normal leading-[1.05] tracking-[-0.025em] text-white">
+            <h1 className="font-serif text-[clamp(2.75rem,6.5vw,5rem)] font-normal leading-[1.05] tracking-[-0.025em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.45),0_1px_1px_rgba(0,0,0,0.35)]">
               Go from zero to one
               <br />
               with AI.
             </h1>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white">
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.55)]">
               A two-day, in-person atelier in Pasadena for executives and
               business owners. Come knowing nothing, or bring an idea. Leave
               having made something real. The founding cohort is just ten seats,
@@ -53,12 +53,12 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/conference"
-                className="text-sm font-medium text-white underline decoration-white/50 decoration-1 underline-offset-[6px] transition-colors hover:decoration-white"
+                className="text-sm font-medium text-white underline decoration-white/50 decoration-1 underline-offset-[6px] [text-shadow:0_1px_4px_rgba(0,0,0,0.55)] transition-colors hover:decoration-white"
               >
                 See the two days
               </Link>
             </div>
-            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white">
+            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.55)]">
               <span>
                 {site.cohort.label} · {site.cohort.dates.workshop}
               </span>

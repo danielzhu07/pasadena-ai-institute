@@ -27,6 +27,8 @@ yarn-error.log*
 # captured interest-form leads (no-key fallback)
 /data/leads.json
 /data/.leads.*.tmp
+/data/payments.json
+/data/.payments.*.tmp
 /data/resumes/
 
 # vercel

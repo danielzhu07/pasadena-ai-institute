@@ -219,7 +219,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Is there a cost?",
-    a: "No payment for the founding cohort. Seats are earned by application, not bought. This first cohort is about building something exceptional together. A seat includes two full days of hands-on instruction, all materials, working lunches both days, the full software setup on your own machine, and the alumni community.",
+    a: "The application is free. Accepted applicants reserve their seat through Stripe. A standard seat is $1,000, and Stripe codes can reduce checkout to $500 or $0 for scholarship seats. A seat includes two full days of hands-on instruction, all materials, working lunches both days, the full software setup on your own machine, and the alumni community.",
   },
   {
     q: "Why only ten seats?",

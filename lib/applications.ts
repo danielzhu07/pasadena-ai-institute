@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import os from "os";
 import path from "path";
+import { getNotificationRecipients, sendNotificationEmail } from "@/lib/notifications";
 
 export const MAX_RESUME_BYTES = 8 * 1024 * 1024;
 
@@ -123,11 +124,8 @@ export async function notifyByEmail(
   lead: Lead,
   resume?: { filename: string; base64: string },
 ) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.LEAD_NOTIFY_EMAIL;
-  if (!apiKey || !to) return false;
+  if (getNotificationRecipients().length === 0) return false;
 
-  const from = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
   const expLabel = lead.experience
     ? EXPERIENCE_LABELS[lead.experience] ?? lead.experience
     : "(not given)";
@@ -148,38 +146,15 @@ export async function notifyByEmail(
     `Received:      ${lead.receivedAt}`,
   ].join("\n");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: `Pasadena AI Workshop <${from}>`,
-        to: [to],
-        reply_to: lead.email,
-        subject: `Founding Cohort application: ${lead.name}`,
-        text,
-        ...(resume
-          ? {
-              attachments: [
-                { filename: resume.filename, content: resume.base64 },
-              ],
-            }
-          : {}),
-      }),
-    });
-
-    if (!res.ok) {
-      console.error("[interest] Resend error:", await res.text());
-      return false;
-    }
-    return true;
-  } catch (err) {
-    console.error("[interest] Resend request failed:", err);
-    return false;
-  }
+  return sendNotificationEmail({
+    subject: `Founding Cohort application: ${lead.name}`,
+    text,
+    replyTo: lead.email,
+    logPrefix: "[interest]",
+    attachments: resume
+      ? [{ filename: resume.filename, content: resume.base64 }]
+      : undefined,
+  });
 }
 
 async function readLeads() {

@@ -33,13 +33,13 @@ export const site = {
     },
   },
 
-  // Pricing is intentionally off for the founding cohort (application, not
-  // payment). Kept here for future paid cohorts.
+  // Application is free. Accepted applicants can reserve with Stripe; discounts
+  // and scholarships are handled with Stripe promotion codes.
   price: {
-    amountUsd: 995,
-    display: "$995",
+    amountUsd: 1000,
+    display: "$1,000",
     currency: "usd",
-    cents: 99500,
+    cents: 100000,
     label: "All-inclusive 2-day seat",
   },
 
