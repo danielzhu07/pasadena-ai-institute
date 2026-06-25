@@ -27,8 +27,16 @@ export function ApplicationForm() {
         method: "POST",
         body: new FormData(form),
       });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json?.error || "Something went wrong.");
+      // A 413 (file too large) is rejected at the platform edge with a non-JSON
+      // body, so parse defensively rather than letting res.json() throw.
+      const json = await res.json().catch(() => null);
+      if (!res.ok) {
+        const fallback =
+          res.status === 413
+            ? "That file is too large to upload. Please attach a resume under 4 MB."
+            : "Something went wrong. Please email us directly.";
+        throw new Error(json?.error || fallback);
+      }
       setStatus("success");
       setMessage(
         json?.message ||
@@ -153,7 +161,7 @@ export function ApplicationForm() {
           </span>
         </button>
         <p className="mt-1.5 max-w-[56ch] text-xs text-ink-500">
-          PDF, DOC, or DOCX, up to 8&nbsp;MB.
+          PDF, DOC, or DOCX, up to 4&nbsp;MB.
         </p>
       </div>
 

@@ -49,7 +49,7 @@ export async function sendNotificationEmail({
     });
 
     if (!res.ok) {
-      console.error(`${logPrefix} Resend error:`, await res.text());
+      console.error(`${logPrefix} Resend error ${res.status}:`, await res.text());
       return false;
     }
 

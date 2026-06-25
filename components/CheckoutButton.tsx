@@ -15,10 +15,12 @@ export function CheckoutButton() {
 
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
-      const json = await res.json();
+      // Parse defensively: a platform timeout/504 returns a non-JSON body that
+      // would otherwise make res.json() throw a raw SyntaxError at the user.
+      const json = await res.json().catch(() => null);
 
       if (!res.ok || !json?.url) {
-        throw new Error(json?.message || "Could not start checkout.");
+        throw new Error(json?.message || "Could not start checkout. Please try again.");
       }
 
       window.location.href = json.url;

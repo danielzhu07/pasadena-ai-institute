@@ -3,7 +3,10 @@ import os from "os";
 import path from "path";
 import { getNotificationRecipients, sendNotificationEmail } from "@/lib/notifications";
 
-export const MAX_RESUME_BYTES = 8 * 1024 * 1024;
+// Capped at 4 MB to stay under Vercel's ~4.5 MB serverless request-body limit.
+// A larger multipart body is rejected with a 413 at the platform edge BEFORE this
+// route runs, which would silently drop the lead (no email, no sheet row).
+export const MAX_RESUME_BYTES = 4 * 1024 * 1024;
 
 export type Lead = {
   name: string;
@@ -78,7 +81,7 @@ export function validateApplication(input: ApplicationInput) {
       return "Please attach a PDF, DOC, or DOCX resume.";
     }
     if (input.resume.buffer.byteLength > MAX_RESUME_BYTES) {
-      return "That resume is over 8 MB. Please attach a smaller file.";
+      return "That resume is over 4 MB. Please attach a smaller file.";
     }
   }
 
@@ -154,7 +157,7 @@ export async function sendApplicantConfirmation(lead: Lead) {
     });
 
     if (!res.ok) {
-      console.error("[interest] applicant confirmation error:", await res.text());
+      console.error(`[interest] applicant confirmation error ${res.status}:`, await res.text());
       return false;
     }
 

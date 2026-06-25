@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     if (file && typeof file !== "string" && file.size > 0) {
       if (file.size > MAX_RESUME_BYTES) {
         return NextResponse.json(
-          { error: "That resume is over 8 MB. Please attach a smaller file." },
+          { error: "That resume is over 4 MB. Please attach a smaller file." },
           { status: 400 },
         );
       }
@@ -102,7 +102,12 @@ export async function POST(req: NextRequest) {
     appendLeadToSheet(lead, resumePayload),
   ]);
 
-  if (!savedLead && !emailed && !loggedToSheet) {
+  // On Vercel the leads-file write lands in ephemeral /tmp, so it is NOT a durable
+  // record — only the email or the sheet survives a container recycle. Require one
+  // of those in production; locally ./data is durable, so savedLead counts there.
+  const persistedDurably =
+    emailed || loggedToSheet || (!process.env.VERCEL && savedLead);
+  if (!persistedDurably) {
     return NextResponse.json(
       {
         error:
@@ -116,8 +121,10 @@ export async function POST(req: NextRequest) {
     console.log("[interest] New application:", JSON.stringify(lead, null, 2));
   }
 
-  // Fire-and-forget — don't block the response on this
-  sendApplicantConfirmation(lead).catch((err) =>
+  // Await so the confirmation email actually flushes: on Vercel's serverless
+  // runtime the instance is frozen once the response returns, which drops any
+  // un-awaited in-flight fetch. sendApplicantConfirmation never throws.
+  await sendApplicantConfirmation(lead).catch((err) =>
     console.error("[interest] applicant confirmation threw:", err),
   );
 
