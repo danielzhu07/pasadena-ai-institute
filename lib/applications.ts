@@ -136,7 +136,7 @@ export async function sendApplicantConfirmation(lead: Lead) {
     "",
     "We read every application personally and review on a rolling basis. You'll hear from us in July.",
     "",
-    "In the meantime, feel free to reach out to us at hello@whistlelabs.ai with any questions.",
+    "In the meantime, feel free to reach out to us at kexia@g.hmc.edu with any questions.",
     "",
     "— The Whistle Labs Team",
   ].join("\n");
