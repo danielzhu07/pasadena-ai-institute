@@ -143,15 +143,14 @@ export async function sendApplicantConfirmation(lead: Lead) {
   const from = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
   const firstName = lead.name.split(" ")[0];
 
-  const sigB64 = getSignatureB64();
-  const signatureTag = sigB64
-    ? `<img src="data:image/jpeg;base64,${sigB64}" alt="Whistle Workshop" width="480" style="display:block;max-width:100%;border-radius:4px;">`
-    : "";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://whistleworkshop.com";
+  // Hidden unique token prevents Gmail from collapsing repeated test sends as "quoted text"
+  const uid = `<!-- ${lead.receivedAt} -->`;
 
   const html = `<!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:Georgia,serif;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:Georgia,serif;">${uid}
   <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;padding:48px 32px;">
     <tr><td>
       <p style="font-size:16px;line-height:1.6;color:#222;margin:0 0 18px 0;">Hi ${firstName},</p>
@@ -160,7 +159,7 @@ export async function sendApplicantConfirmation(lead: Lead) {
       <p style="font-size:16px;line-height:1.6;color:#222;margin:0 0 32px 0;">Should you have any questions in the meantime, please don't hesitate to contact Kevin at <a href="mailto:kexia@g.hmc.edu" style="color:#222;">kexia@g.hmc.edu</a>. We look forward to reading yours.</p>
       <p style="font-size:16px;line-height:1.6;color:#222;margin:0 0 4px 0;">Warmly,</p>
       <p style="font-size:16px;line-height:1.6;color:#222;margin:0 0 40px 0;">The Whistle Workshop Team</p>
-      ${signatureTag}
+      <img src="${siteUrl}/email-signature.jpg" alt="Whistle Workshop" width="480" style="display:block;max-width:100%;border-radius:4px;">
     </td></tr>
   </table>
 </body>
