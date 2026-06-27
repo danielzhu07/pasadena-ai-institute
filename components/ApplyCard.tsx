@@ -25,7 +25,7 @@ export function ApplyCard() {
         </span>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-white/65">
-        The first cohort, in person in Pasadena on {site.cohort.dates.workshop}.
+        The first cohort, in person in Pasadena in {site.cohort.season}.
         Seats are earned by application first; accepted applicants reserve to
         lock in their spot.
       </p>

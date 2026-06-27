@@ -17,7 +17,7 @@ const steps = [
     when: site.cohort.dates.workshopShort,
     title: "Join the ten",
     detail:
-      "The founding cohort meets in person in Pasadena on July 11, 2026: one day, ten people, building something real.",
+      "The founding cohort meets in person in Pasadena in July 2026: one day, ten people, building something real.",
   },
 ];
 
