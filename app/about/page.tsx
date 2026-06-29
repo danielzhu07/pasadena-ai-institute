@@ -15,11 +15,35 @@ export const metadata: Metadata = {
 
 const team = [
   {
+    name: "James Gómez",
+    photo: "/team/james.jpg",
+    photoPosition: "center top",
+    schoolLogo: "/schools/cmc.jpg",
+    schoolAlt: "Claremont McKenna College",
+    logoClass: "h-24 w-auto",
+  },
+  {
     name: "Jake Hofman",
     photo: "/team/jake2.png",
     photoPosition: "center top",
     schoolLogo: "/schools/stanford.svg",
     schoolAlt: "Stanford University",
+    logoClass: "h-24 w-auto",
+  },
+  {
+    name: "Kevin Xia",
+    photo: "/team/kevin.jpg",
+    photoPosition: "center top",
+    schoolLogo: "/schools/harvey-mudd.png",
+    schoolAlt: "Harvey Mudd College",
+    logoClass: "h-24 w-auto",
+  },
+  {
+    name: "Daniel Zhu",
+    photo: "/team/daniel.png",
+    photoPosition: "center top",
+    schoolLogo: "/schools/harvey-mudd.png",
+    schoolAlt: "Harvey Mudd College",
     logoClass: "h-24 w-auto",
   },
 ];
@@ -63,7 +87,7 @@ export default function AboutPage() {
       {/* Team */}
       <Section className="bg-canvas">
         <SectionHeading title="Meet the Team" eyebrow="Who's in the room" />
-        <ul className="mx-auto mt-12 grid max-w-64 grid-cols-1 gap-x-8 gap-y-14">
+        <ul className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-4">
           {team.map((person, i) => (
             <Reveal key={person.name} delay={i * 0.07}>
               <li className="flex flex-col items-center gap-5">
