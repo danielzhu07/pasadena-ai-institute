@@ -24,14 +24,6 @@ const team = [
     logoClass: "h-24 w-auto",
   },
   {
-    name: "Jake Hofman",
-    photo: "/team/jake2.png",
-    photoPosition: "center top",
-    schoolLogo: "/schools/stanford.svg",
-    schoolAlt: "Stanford University",
-    logoClass: "h-24 w-auto",
-  },
-  {
     name: "Kevin Xia",
     photo: "/team/kevin.jpg",
     photoPosition: "center top",
@@ -45,6 +37,14 @@ const team = [
     photoPosition: "center top",
     schoolLogo: "/schools/harvey-mudd.png",
     schoolAlt: "Harvey Mudd College",
+    logoClass: "h-24 w-auto",
+  },
+  {
+    name: "Jake Hofman",
+    photo: "/team/jake2.png",
+    photoPosition: "center top",
+    schoolLogo: "/schools/stanford.svg",
+    schoolAlt: "Stanford University",
     logoClass: "h-24 w-auto",
   },
 ];
